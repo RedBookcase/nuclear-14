@@ -1387,9 +1387,9 @@
   availableFaction:
   - CaesarLegion
   materials:
-    N14Iron: 500
+    N14Iron: 300
 
-    Leather: 200
+    Leather: 100
 
 
 - type: latheRecipe
@@ -1403,7 +1403,7 @@
   materials:
     Wood: 1000
 
-    Leather: 200
+    Leather: 150
 
 
 - type: latheRecipe
@@ -1415,9 +1415,9 @@
   availableFaction:
   - CaesarLegion
   materials:
-    Scrap: 2000
+    Scrap: 1000
 
-    ScrapSteel: 500
+    ScrapSteel: 400
 
 
 - type: latheRecipe
@@ -1445,9 +1445,9 @@
   materials:
     Wood: 2500
 
-    N14Iron: 1200
+    N14Iron: 700
 
-    Leather: 200
+    Leather: 100
 
 
 - type: latheRecipe
@@ -1476,11 +1476,11 @@
   availableFaction:
   - CaesarLegion
   materials:
-    N14Iron: 1500
+    N14Iron: 1200
 
     Leather: 70
 
-    Wood: 500
+    Wood: 300
 
 
 - type: latheRecipe
@@ -1492,9 +1492,9 @@
   availableFaction:
   - CaesarLegion
   materials:
-    Steel: 2500
+    Steel: 1000
 
-    N14Iron: 700
+    N14Iron: 300
 
     Leather: 20
 
@@ -1510,7 +1510,7 @@
   materials:
     N14Iron: 1200
 
-    Wood: 1500
+    Wood: 700
 
     Leather: 20
 
@@ -1524,9 +1524,9 @@
   availableFaction:
   - CaesarLegion
   materials:
-    N14Iron: 2500
+    N14Iron: 1400
 
-    Leather: 700
+    Leather: 300
 
     Cloth: 200
 
@@ -1556,9 +1556,9 @@
   availableFaction:
   - CaesarLegion
   materials:
-    Steel: 3000
+    Steel: 1500
 
-    Wood: 2000
+    Wood: 1000
 
     N14Iron: 20
 
@@ -1588,9 +1588,9 @@
   availableFaction:
   - CaesarLegion
   materials:
-    Wood: 2500
+    Wood: 1500
 
-    N14Iron: 1000
+    N14Iron: 500
 
     Leather: 20
 
@@ -1607,11 +1607,11 @@
   materials:
     Steel: 6000
 
-    N14Iron: 1500
+    N14Iron: 700
 
     Leather: 70
 
-    N14Gold: 50
+    N14Gold: 100
 
 
 - type: latheRecipe
@@ -1639,7 +1639,7 @@
   availableFaction:
   - CaesarLegion
   materials:
-    Steel: 6000
+    Steel: 5000
 
     Wood: 250
 
@@ -1655,11 +1655,11 @@
   availableFaction:
   - CaesarLegion
   materials:
-    Wood: 3000
+    Wood: 3500
 
-    N14Iron: 1500
+    N14Iron: 500
 
-    Leather: 400
+    Leather: 100
 
 
 - type: latheRecipe
@@ -1723,7 +1723,7 @@
   materials:
     Steel: 6000
 
-    N14Iron: 1700
+    N14Iron: 700
 
     N14Brass: 150
 
@@ -1840,7 +1840,7 @@
   materials:
     Wood: 3000
 
-    N14Iron: 1250
+    N14Iron: 950
 
     Leather: 170
 
@@ -1892,11 +1892,11 @@
   availableFaction:
   - CaesarLegion
   materials:
-    Steel: 7000
+    Steel: 2000
 
     N14Iron: 350
 
-    Wood: 2000
+    Wood: 2500
 
     Leather: 120
 
