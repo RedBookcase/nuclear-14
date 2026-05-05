@@ -21,17 +21,6 @@
     Potassium: 5
 
 - type: reaction
-  id: WaterBreakdown
-  source: true
-  requiredMixerCategories:
-  - Electrolysis
-  reactants:
-    Water: 2
-  products: ##H2O so 1 water is h2 (1 hydrogen molecule) and 1 "O", (.5 oxygen molecules)
-    Hydrogen: 2
-    Oxygen: 1
-
-- type: reaction
   id: BananaYuccaCentrifuge
   source: true
   requiredMixerCategories: ## if you centrifuge it it explodes!
