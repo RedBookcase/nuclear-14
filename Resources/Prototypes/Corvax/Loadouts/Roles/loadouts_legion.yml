@@ -204,10 +204,10 @@
   items:
     - N14ClothingNeckCloakLegionRed
 
-- type: trait
+- type: loadout
   id: LoadoutLegionPrimeHeavyArmor
   category: Outer
-  cost: 14 # EVERY. SINGLE. POINT.
+  Cost: 14 # EVERY. SINGLE. POINT.
   exclusive: true
   requirements:
     - !type:CharacterJobRequirement
