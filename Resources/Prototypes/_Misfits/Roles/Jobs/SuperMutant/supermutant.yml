@@ -399,7 +399,6 @@
     jumpsuit: ClothingSuperMutantJumpsuit
     back: ClothingBackpackDuffelSurgeryFilled
     belt: N14ClothingBeltMedicalFilled
-    gloves: SupermutantFollowerGloves
     neck: ClothingNeckStethoscope
     id: N14IDDoctorFollower
     ears: N14ClothingHeadsetFollowers
