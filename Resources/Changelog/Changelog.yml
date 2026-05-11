@@ -4834,3 +4834,10 @@ Entries:
   id: 5859
   time: '2026-05-11T17:54:41.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/471
+- author: Misterzeppelin
+  changes:
+    - type: Add
+      message: Unfactioned Supermutant IDs and headset, working on Nightkin updates
+  id: 5860
+  time: '2026-05-11T17:55:11.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/469
