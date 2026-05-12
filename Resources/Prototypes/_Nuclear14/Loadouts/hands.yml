@@ -111,12 +111,33 @@
     - N14ClothingHandsGlovesNitrilePurple
 
 
+
 - type: loadout
-  id: N14GoliathFist
+  id: N14GoliathFistLeader
   category: Hands
   cost: 4
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutHands
+    - !type:CharacterJobRequirement
+      job:
+        - CaesarLegionCenturion 
+        - TribalElder
   items:
     - N14ClothingHandsPowerFistGoliath
+
+
+- type: loadout
+  id: N14GoliathFist
+  category: Hands
+  cost: 8
+  requirements:
+    - !type:CharacterItemGroupRequirement
+      group: N14LoadoutHands    
+    - !type:CharacterDepartmentRequirement
+      departments:
+        - CaesarLegion
+        - Tribal
+  items:
+    - N14ClothingHandsPowerFistGoliath
+
