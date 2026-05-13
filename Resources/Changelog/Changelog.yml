@@ -5067,3 +5067,14 @@ Entries:
   id: 5884
   time: '2026-05-13T21:07:49.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/509
+- author: HungryCuban
+  changes:
+    - type: Tweak
+      message: 'Reduce Neostead ammo capacity '
+    - type: Tweak
+      message: 'Neostead now requires wielding '
+    - type: Fix
+      message: Fixed Neostead backsprite being the same as inhand sprite
+  id: 5885
+  time: '2026-05-13T21:08:37.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/511
