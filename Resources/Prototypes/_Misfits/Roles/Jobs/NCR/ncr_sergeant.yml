@@ -40,7 +40,7 @@
     jumpsuit: N14ClothingOfficerUniformNCRDesert
     shoes: N14ClothingBootsCombatFilled
     ears: N14ClothingHeadsetNCR
-    neck: ClothingNeckPinNCRCorporal # CPL (E-4) starting pin; SGT/SSG/SFC unlock via loadout
+
     belt: ClothingBeltNCR
     outerClothing: MisfitsNCRHeavyCombatArmor # T5 armor (0.70/0.65)
     pocket1: NCRSGTloadoutkits

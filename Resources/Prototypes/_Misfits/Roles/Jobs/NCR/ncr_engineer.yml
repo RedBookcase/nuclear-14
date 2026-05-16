@@ -41,7 +41,7 @@
     shoes: N14ClothingBootsLeatherFilled
     ears: N14ClothingHeadsetNCR # #Misfits Add - NCR radio earpiece
     hands: N14ClothingHandsGlovesCombat
-    neck: ClothingNeckPinNCRPrivate # PV2 (E-2) starting pin; PFC/SPC unlock via loadout
+
     id: N14IDNCRDogtagEngineer
     pocket1: NCRengineerloadoutkits
   innerClothingSkirt: N14ClothingUniformNCRDesert # Corvax-Change

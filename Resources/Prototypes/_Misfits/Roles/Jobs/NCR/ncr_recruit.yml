@@ -39,7 +39,7 @@
     jumpsuit: N14ClothingUniformNCRDesert # Corvax-Change
     shoes: N14ClothingBootsLeatherFilled
     ears: N14ClothingHeadsetNCR # #Misfits Add - NCR radio earpiece
-    neck: ClothingNeckPinNCRRecruit
+
     belt: ClothingBeltNCR
     pocket1: NCRcadetloadoutkits
     id: N14IDNCRDogtag

@@ -45,7 +45,7 @@
     jumpsuit: N14ClothingOfficerUniformNCRDesert
     outerClothing: N14ClothingOuterNCRDressJacketCO
     shoes: N14ClothingBootsCombatFilled
-    neck: ClothingNeckPinNCRCaptain # Captain (O-3) starting pin; Major unlocks via loadout
+
     belt: ClothingBeltNCR
     eyes: ClothingEyesGlassesSunglasses
     ears: N14ClothingHeadsetNCR

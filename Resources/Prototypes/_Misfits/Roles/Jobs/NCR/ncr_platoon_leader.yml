@@ -44,7 +44,7 @@
     jumpsuit: N14ClothingOfficerUniformNCRDesert
     outerClothing: N14ClothingOuterNCRDressJacket
     shoes: N14ClothingBootsCombatFilled
-    neck: ClothingNeckPinNCRSecondLieutenant # 2LT (O-1) starting pin; 1LT unlocks via loadout
+
     belt: ClothingBeltNCR
     eyes: ClothingEyesGlassesSunglasses
     ears: N14ClothingHeadsetNCR

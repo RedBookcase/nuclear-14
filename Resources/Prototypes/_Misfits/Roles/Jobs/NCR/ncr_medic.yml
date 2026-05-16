@@ -41,7 +41,7 @@
     back: N14ClothingBackpackNCR # Corvax-Change
     shoes: N14ClothingBootsLeatherFilled
     ears: N14ClothingHeadsetNCR # #Misfits Add - NCR radio earpiece
-    neck: ClothingNeckPinNCRPrivate # PV2 (E-2) starting pin; PFC/SPC unlock via loadout
+
     belt: ClothingBeltNCR
     id: N14IDNCRDogtagDoctor
     pocket2: NCRmedicloadoutkits

@@ -45,7 +45,7 @@
     outerClothing: MisfitsNCRPouchedCombatArmor # #Misfits Tweak: T4 armor (0.75/0.70) — Specialist gets combat-grade protection while keeping utility pouches
     shoes: N14ClothingBootsLeatherFilled
     ears: N14ClothingHeadsetNCR # #Misfits Add - NCR radio earpiece
-    neck: ClothingNeckPinNCRPrivate # PV2 (E-2) starting pin; PFC/SPC unlock via loadout
+
     belt: ClothingBeltNCR
     pocket1: NCRcorporalloadoutkits
     id: N14IDNCRDogtagWS

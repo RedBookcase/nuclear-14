@@ -42,7 +42,7 @@
     back: N14ClothingBackpackNCR # Corvax-Change
     shoes: N14ClothingBootsLeatherFilled
     ears: N14ClothingHeadsetNCR # #Misfits Add - NCR radio earpiece
-    neck: ClothingNeckPinNCRCaptain # Captain (O-3) pin; Major unlocks via loadout; Doctor pin available as loadout cosmetic
+
     belt: ClothingBeltNCR
     id: N14IDNCRDogtagDoctorSenior
     pocket2: NCRmedicloadoutkits

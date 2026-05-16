@@ -1,0 +1,83 @@
+# NCR Rank Pin Progressions
+# NCRRankPinSpawnSystem reads these at round start and places the appropriate pin
+# in the player's hand based on their playtime in the tracker or department.
+
+# Command Officers: Captain (O-3) → Major (O-4) at 20h NCR dept time
+- type: ncrRankPinProgression
+  id: NCRCommandOfficerPins
+  jobs:
+    - NCRCommander
+    - NCRDoctor
+  tracker: NCR
+  departmentTracker: true
+  thresholds:
+    - min: 0
+      entity: ClothingNeckPinNCRCaptain
+    - min: 72000   # 20 hours
+      entity: ClothingNeckPinNCRMajor
+
+# Junior Officers: 2LT (O-1) → 1LT (O-2) at 20h NCR dept time
+- type: ncrRankPinProgression
+  id: NCRJuniorOfficerPins
+  jobs:
+    - NCRExecutiveOfficer
+    - NCRPlatoonLeader
+  tracker: NCR
+  departmentTracker: true
+  thresholds:
+    - min: 0
+      entity: ClothingNeckPinNCRSecondLieutenant
+    - min: 72000   # 20 hours
+      entity: ClothingNeckPinNCRFirstlLieutenant
+
+# NCOs: CPL (E-4) → SGT (E-5) at 20h → SSG (E-6) at 40h → SFC (E-7) at 60h NCRNCO tracker
+- type: ncrRankPinProgression
+  id: NCRNCOPins
+  jobs:
+    - NCRNCO
+  tracker: NCRNCO
+  departmentTracker: false
+  thresholds:
+    - min: 0
+      entity: ClothingNeckPinNCRCorporal
+    - min: 72000   # 20 hours
+      entity: ClothingNeckPinNCRSergeant
+    - min: 144000  # 40 hours
+      entity: ClothingNeckPinNCRSergeant1st
+    - min: 216000  # 60 hours
+      entity: ClothingNeckPinNCRMasterSergeant
+
+# Specialists: PV2 (E-2) → PFC (E-3) at 20h NCR dept → SPC (E-4) at 40h NCR dept
+- type: ncrRankPinProgression
+  id: NCRSpecialistPins
+  jobs:
+    - NCRWS
+    - NCREngineer
+    - NCRMedic
+    - NCRHeavyTrooper
+  tracker: NCR
+  departmentTracker: true
+  thresholds:
+    - min: 0
+      entity: ClothingNeckPinNCRPrivate
+    - min: 72000   # 20 hours
+      entity: ClothingNeckPinNCRPrivate1st
+    - min: 144000  # 40 hours
+      entity: ClothingNeckPinNCRSpecialist
+
+# Troopers: Recruit (E-1) → PV2 at 20h NCR dept → PFC at 40h NCR dept → SPC at 60h NCR dept
+- type: ncrRankPinProgression
+  id: NCRTrooperPins
+  jobs:
+    - NCRCadet
+  tracker: NCR
+  departmentTracker: true
+  thresholds:
+    - min: 0
+      entity: ClothingNeckPinNCRRecruit
+    - min: 72000   # 20 hours
+      entity: ClothingNeckPinNCRPrivate
+    - min: 144000  # 40 hours
+      entity: ClothingNeckPinNCRPrivate1st
+    - min: 216000  # 60 hours
+      entity: ClothingNeckPinNCRSpecialist
