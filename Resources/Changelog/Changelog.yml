@@ -5203,3 +5203,10 @@ Entries:
   id: 5898
   time: '2026-05-16T18:20:04.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/532
+- author: Tytos
+  changes:
+    - type: Tweak
+      message: many small tweaks to Wendover map
+  id: 5899
+  time: '2026-05-16T18:42:35.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/531
