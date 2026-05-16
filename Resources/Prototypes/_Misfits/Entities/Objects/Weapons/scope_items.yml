@@ -14,12 +14,12 @@
 
 # ────────────────────────────────────────────────────────────────────────────
 # N14 Binoculars — RMC-style directional scope (DoAfter, PVS relay, zoom levels)
-# One handed. Little delay. Locks view in cardinal direction. We Stalker meta now boys HEH -pierow
+# Two handed. Little delay. Locks view in cardinal direction. We kinda Stalker meta now boys HEH -pierow
 - type: entity
   parent: BaseItem
   id: N14Binoculars
   name: binoculars
-  description: A pair of pre-war binoculars. Look through them to see far in one direction.
+  description: A pair of pre-war binoculars. Wield them with two hands and look through to see far in one direction.
   components:
   - type: Item
     size: Small
@@ -34,7 +34,7 @@
     - suitstorage
   - type: Scope
     useInHand: true
-    requireWielding: false
+    requireWielding: true
     zoomLevels:
     - name: 5x
       zoom: 1.2
