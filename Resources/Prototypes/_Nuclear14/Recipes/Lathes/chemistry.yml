@@ -5,7 +5,7 @@
   category: N14Chemistry
   materials:
     Glass: 50
-    WoodPlank: 25
+    Wood: 25
 
 - type: latheRecipe
   id: N14Beaker
