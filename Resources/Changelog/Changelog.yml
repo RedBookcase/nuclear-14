@@ -5310,3 +5310,12 @@ Entries:
   id: 5908
   time: '2026-05-18T16:13:38.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/549
+- author: Bradysgaming
+  changes:
+    - type: Remove
+      message: Removed Power Armor storage
+    - type: Fix
+      message: Fixed Power Armor eating topicals.
+  id: 5909
+  time: '2026-05-18T17:52:48.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/547
