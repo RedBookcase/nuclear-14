@@ -12,7 +12,7 @@
   maxHeight: 1.249 # Corvax-Change
   minWidth: 0.825 # Corvax-Change
   maxWidth: 1.05 # Corvax-Change
-  minAge: 200 # Corvax-Change
+  minAge: 18 # Corvax-Change
   oldAge: 250 # Corvax-Change
   maxAge: 300 # Corvax-Change
 # The lack of a layer means that
