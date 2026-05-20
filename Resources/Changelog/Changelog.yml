@@ -5368,3 +5368,16 @@ Entries:
   id: 5914
   time: '2026-05-19T23:02:14.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/558
+- author: Billy Boy
+  changes:
+    - type: Tweak
+      message: >-
+        Modified plasma rifle's ROF, entirely due to them being recently buffed.
+        Hit yo shots kid.
+    - type: Tweak
+      message: >-
+        Makes stimpacks into ROOFIES they knock you out at critical OD instead
+        of megapoison.
+  id: 5915
+  time: '2026-05-20T02:17:50.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/559
