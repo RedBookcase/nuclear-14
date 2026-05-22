@@ -14,6 +14,7 @@ public sealed class SpecialPenaltySystem : EntitySystem
 {
     [Dependency] private readonly SharedSpecialSystem _special = default!;
 
+    private const int LowCharismaThreshold = 5;
     private const int LowIntelligenceThreshold = 2;
     private const int ClumsyLuckThreshold = 4;
 
@@ -40,12 +41,19 @@ public sealed class SpecialPenaltySystem : EntitySystem
 
     private void OnSpecialShutdown(ref SpecialShutdownEvent args)
     {
+        ClearLowCharisma(args.Entity);
         ClearLowIntelligence(args.Entity);
         ClearLuckClumsy(args.Entity);
     }
 
     private void ApplyPenalties(Entity<SpecialComponent> ent)
     {
+        var charisma = _special.GetEffective(ent.Owner, SpecialStat.Charisma, ent.Comp);
+        if (charisma < LowCharismaThreshold)
+            ApplyLowCharisma(ent.Owner, charisma);
+        else
+            ClearLowCharisma(ent.Owner);
+
         if (_special.GetEffective(ent.Owner, SpecialStat.Intelligence, ent.Comp) < LowIntelligenceThreshold)
             ApplyLowIntelligence(ent.Owner);
         else
@@ -55,6 +63,17 @@ public sealed class SpecialPenaltySystem : EntitySystem
             ApplyLuckClumsy(ent.Owner);
         else
             ClearLuckClumsy(ent.Owner);
+    }
+
+    private void ApplyLowCharisma(EntityUid uid, int charisma)
+    {
+        var comp = EnsureComp<SpecialLowCharismaComponent>(uid);
+        comp.Charisma = charisma;
+    }
+
+    private void ClearLowCharisma(EntityUid uid)
+    {
+        RemComp<SpecialLowCharismaComponent>(uid);
     }
 
     private void ApplyLowIntelligence(EntityUid uid)
