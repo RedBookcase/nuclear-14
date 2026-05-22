@@ -5530,3 +5530,16 @@ Entries:
   id: 5929
   time: '2026-05-22T23:26:57.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/571
+- author: Squagg
+  changes:
+    - type: Add
+      message: S.P.E.C.I.A.L. System
+    - type: Fix
+      message: Allows lobotomies to be actually be reverted
+    - type: Add
+      message: More loadout drip
+    - type: Tweak
+      message: SMs can now move at full speed while wielding two-handed weapons
+  id: 5930
+  time: '2026-05-22T23:29:01.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/572
