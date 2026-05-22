@@ -581,3 +581,82 @@
       # conditions:
       # - !type:ReagentThreshold
       #   min: 25
+      -
+- type: reaction
+  id: epoetine
+  reactants:
+    Oxygen:
+      amount: 2
+    Uranium:
+      amount: 1
+      catalyst: true
+  products:
+    Epoetine: 3
+
+- type: reagent
+  id: Epoetine
+  name: reagent-name-epoetine
+  group: Chems
+  desc: reagent-desc-epoetine
+  physicalDesc: reagent-physical-desc-refreshing
+  color: "#0041a8"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: -1
+            Bloodloss: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        damage:
+          types:
+            Asphyxiation: 3
+            Cold: 1
+
+- type: reaction
+  id: BetaEpoetine
+  reactants:
+    Epoetine:
+      amount: 1
+    Carbon:
+      amount: 1
+    Iron:
+      amount: 1
+  products:
+    BetaEpoetine: 3
+
+- type: reagent
+  id: BetaEpoetine
+  name: reagent-name-beta-epoetine
+  group: Medicine
+  desc: reagent-desc-beta-epoetine
+  physicalDesc: reagent-physical-desc-tangy
+  flavor: medicine
+  color: "#4da0bd"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: -3.5
+            Bloodloss: -3
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: HeartbreakerToxin
+          min: 1
+        reagent: HeartbreakerToxin
+        amount: -3
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Asphyxiation: 5
+            Cold: 3
