@@ -26,7 +26,6 @@
   - type: ExaminableSolution
     solution: pen
   - type: Hypospray
-    doAfterDuration: 1.5
     onlyAffectsMobs: false
     solutionName: pen
     transferAmount: 30
@@ -130,6 +129,8 @@
     tags:
     - Syringe
     - N14EmptySyringe
+  - type: UseDelay
+    delay: 0.75
 
 - type: entity
   parent: N14Stimpak
@@ -182,6 +183,8 @@
     tags:
     - Syringe
     - N14EmptySyringe
+  - type: UseDelay
+    delay: 1.5
 
 - type: entity
   parent: N14ChemicalSyringe
@@ -208,6 +211,8 @@
   - type: Tag
     tags:
     - Syringe
+  - type: UseDelay
+    delay: 0.75
 
 - type: entity
   parent: N14ChemicalSyringeAntidoteEmpty
@@ -251,6 +256,8 @@
     tags:
     - Jet
     - Syringe
+  - type: UseDelay
+    delay: 0.5
 
 - type: entity
   parent: N14JetInhaler
@@ -296,6 +303,8 @@
     tags:
     - Turbo
     - Syringe
+  - type: UseDelay
+    delay: 0.25
 
 - type: entity
   parent: N14TurboInhaler
@@ -338,6 +347,8 @@
         reagents:
         - ReagentId: DamageResistMixture
           Quantity: 20
+  - type: UseDelay
+    delay: 0.75
 
 - type: entity
   parent: N14ChemicalSyringe
@@ -367,6 +378,8 @@
     tags:
     - HydraInhaler
     - Syringe
+  - type: UseDelay
+    delay: 0.5
 
 - type: entity
   parent: N14HydraInhaler
@@ -413,6 +426,8 @@
   - type: Tag
     tags:
     - Syringe
+  - type: UseDelay
+    delay: 1.5
 
 - type: entity
   parent: N14PsychoSyringe
@@ -458,6 +473,8 @@
         reagents:
         - ReagentId: RadAway
           Quantity: 20
+  - type: UseDelay
+    delay: 1.25
 
 #MARK: RadAway Inhaler
 - type: entity
@@ -487,6 +504,8 @@
     solutions:
       pen:
         maxVol: 30
+  - type: UseDelay
+    delay: 0.5
 
 - type: entity
   parent: N14RadAwayInhalerBase
@@ -648,7 +667,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 10
+        damage: 75
       behaviors:
       - !type:SpillBehavior
         solution: food
@@ -694,7 +713,7 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 100
+        maxVol: 60
   - type: Sprite
     sprite: _Nuclear14/Objects/Specific/Medical/fallout2.rsi
     state: antidote
@@ -718,10 +737,10 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 100
+        maxVol: 60
         reagents:
         - ReagentId: Antidote
-          Quantity: 100
+          Quantity: 60
 
 - type: entity
   # #Misfits Change /Tweak/ - Smelling salts use a long resuscitation interaction instead of injecting a reagent.
@@ -867,7 +886,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 10
+        damage: 100
       behaviors:
       - !type:SpillBehavior
         solution: food
