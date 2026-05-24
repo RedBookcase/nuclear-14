@@ -5626,3 +5626,12 @@ Entries:
   id: 5938
   time: '2026-05-24T18:57:58.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/588
+- author: Lucky
+  changes:
+    - type: Tweak
+      message: BOS hotfix
+    - type: Tweak
+      message: temporary FOTA starting supplies
+  id: 5939
+  time: '2026-05-24T20:19:25.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/586
