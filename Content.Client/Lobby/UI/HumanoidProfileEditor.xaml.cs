@@ -2593,7 +2593,7 @@ namespace Content.Client.Lobby.UI
                 : $"hand crafting delay {FormatSignedPercent(GetIntelligenceConstructionDelayModifier(value))}";
             var lathe = value <= 3
                 ? "lathes locked"
-                : $"lathe production time {FormatSignedPercent(GetIntelligenceLatheTimeModifier(value, tuning))}";
+                : $"lathe production time {FormatSignedPercent(GetIntelligenceLatheTimeModifier(value, tuning))}, lathe material cost {FormatSignedPercent(GetIntelligenceLatheMaterialCostModifier(value, tuning))}";
             var medical = $"medical action speed {FormatSignedPercent(SharedSpecialSystem.GetIntelligenceMedicalActionSpeed(value) - 1f)} (CPR, healing, surgery, scans)";
             var extra = value switch
             {
@@ -2666,6 +2666,14 @@ namespace Content.Client.Lobby.UI
                 : 1f + (SpecialProfile.DefaultValue - value) * 0.15f;
 
             return MathF.Max(0.1f, multiplier) - 1f;
+        }
+
+        private static float GetIntelligenceLatheMaterialCostModifier(int value, SpecialTuningPrototype tuning)
+        {
+            return SharedSpecialSystem.GetIntelligenceLatheMaterialUseMultiplier(
+                value,
+                1f,
+                tuning.IntelligenceLatheMaterialDiscountAtTen) - 1f;
         }
 
         private static string FormatSignedPercent(float value)
