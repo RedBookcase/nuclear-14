@@ -464,7 +464,6 @@ namespace Content.Server.NPC.Systems
             htn.Blackboard.Remove<PathResultEvent>(NPCBlackboard.PathfindKey);
 
             // Clear any exception-list hostility that was set via AggroEntity during Neutral escort mode.
-            // Without this, returning to Neutral re-engages the same target because it's still in Hostiles.
             if (TryComp<FactionExceptionComponent>(htn.Owner, out var factionException) && factionException.Hostiles.Count > 0)
             {
                 var hostilesToClear = new List<EntityUid>(factionException.Hostiles);

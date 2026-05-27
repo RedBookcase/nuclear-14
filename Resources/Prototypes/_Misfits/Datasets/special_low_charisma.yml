@@ -1,5 +1,3 @@
-# Low-charisma speech filler datasets used by SpecialLowCharismaSystem.
-
 - type: localizedDataset
   id: SpecialLowCharismaOpeners
   values:

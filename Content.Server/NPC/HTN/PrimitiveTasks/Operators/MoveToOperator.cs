@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.Pathfinding;
 using Content.Server.NPC.Systems;
-using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
@@ -19,7 +18,6 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
     private NPCSteeringSystem _steering = default!;
     private PathfindingSystem _pathfind = default!;
     private SharedTransformSystem _transform = default!;
-    private ISawmill _followSawmill = default!;
 
     /// <summary>
     /// When to shut the task down.
@@ -71,7 +69,6 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
         _pathfind = sysManager.GetEntitySystem<PathfindingSystem>();
         _steering = sysManager.GetEntitySystem<NPCSteeringSystem>();
         _transform = sysManager.GetEntitySystem<SharedTransformSystem>();
-        _followSawmill = Logger.GetSawmill("npc.follow.move");
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -144,21 +141,9 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
 
         // Need to remove the planning value for execution.
         blackboard.Remove<EntityCoordinates>(NPCBlackboard.OwnerCoordinates);
-        var isFollowerMove = blackboard.TryGetValue<EntityCoordinates>(NPCBlackboard.FollowTarget, out var followTarget, _entManager);
 
         if (!blackboard.TryGetValue<EntityCoordinates>(TargetKey, out var targetCoordinates, _entManager))
-        {
-            if (isFollowerMove)
-            {
-                _followSawmill.Debug(
-                    $"StartupMissingTarget: owner={_entManager.ToPrettyString(uid)} targetKey={TargetKey} followTarget={followTarget}.");
-            }
-
             return;
-        }
-
-        isFollowerMove =
-            followTarget == targetCoordinates;
 
         // Re-use the path we may have if applicable.
         var comp = _steering.Register(uid, targetCoordinates);
@@ -182,14 +167,6 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
 
             comp.CurrentPath = new Queue<PathPoly>(result.Path);
         }
-
-        if (isFollowerMove && _entManager.TryGetComponent<TransformComponent>(uid, out var xform))
-        {
-            var hasDistance = xform.Coordinates.TryDistance(_entManager, targetCoordinates, out var distance);
-            _followSawmill.Debug(
-                $"Startup: owner={_entManager.ToPrettyString(uid)} target={_entManager.ToPrettyString(targetCoordinates.EntityId)} " +
-                $"distance={(hasDistance ? distance : -1f):F2} range={comp.Range:F2} pathNodes={comp.CurrentPath.Count} pathfindInPlanning={PathfindInPlanning}.");
-        }
     }
 
     public override HTNOperatorStatus Update(NPCBlackboard blackboard, float frameTime)
@@ -205,25 +182,13 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
             return HTNOperatorStatus.Finished;
         }
 
-        var status = steering.Status switch
+        return steering.Status switch
         {
             SteeringStatus.InRange => HTNOperatorStatus.Finished,
             SteeringStatus.NoPath => HTNOperatorStatus.Failed,
             SteeringStatus.Moving => HTNOperatorStatus.Continuing,
             _ => throw new ArgumentOutOfRangeException()
         };
-
-        if (status != HTNOperatorStatus.Continuing &&
-            blackboard.TryGetValue<EntityCoordinates>(NPCBlackboard.FollowTarget, out var followTarget, _entManager) &&
-            blackboard.TryGetValue<EntityCoordinates>(TargetKey, out var targetCoordinates, _entManager) &&
-            followTarget == targetCoordinates)
-        {
-            _followSawmill.Debug(
-                $"Update: owner={_entManager.ToPrettyString(owner)} target={_entManager.ToPrettyString(targetCoordinates.EntityId)} " +
-                $"steeringStatus={steering.Status} operatorStatus={status} currentPath={steering.CurrentPath.Count} range={steering.Range:F2}.");
-        }
-
-        return status;
     }
 
     public void ConditionalShutdown(NPCBlackboard blackboard)
