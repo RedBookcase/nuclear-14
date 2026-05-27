@@ -192,6 +192,19 @@ public sealed class SharedSpecialSystem : EntitySystem
         return curvedDelta * multiplierPerPoint;
     }
 
+    public float GetCurvedEffectScale(
+        EntityUid uid,
+        SpecialStat stat,
+        float penaltyAtOne,
+        float bonusAtTen,
+        SpecialComponent? component = null)
+    {
+        var delta = GetCurvedEffectDelta(uid, stat, component);
+        if (delta <= 0f)
+            return penaltyAtOne * (-delta / 5f);
+        return bonusAtTen * (delta / 7.5f);
+    }
+
     public static int GetCharismaLoadoutPointModifier(int charisma)
     {
         return (int) Math.Round(GetCurvedEffectDelta(charisma) * 2f, MidpointRounding.AwayFromZero);
