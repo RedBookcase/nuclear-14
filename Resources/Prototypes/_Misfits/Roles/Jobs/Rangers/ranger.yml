@@ -26,7 +26,6 @@
       department: Rangers
       min: 72000 # 20 hours
     - !type:CharacterSpeciesRequirement # #Misfits Change - robots, super mutants, and glowing ghouls cannot be Rangers
-      inverted: true
       species:
       - Human
       - Ghoul
