@@ -6337,3 +6337,16 @@ Entries:
   id: 6004
   time: '2026-06-01T20:24:22.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/658
+- author: Squagg
+  changes:
+    - type: Fix
+      message: >-
+        Weather now fades more smoothly around roofs and weather-blocked areas
+        instead of abruptly cutting off.
+    - type: Tweak
+      message: >-
+        Updated random weather pool chances and visibility behavior for ashfall,
+        sandstorms, snow, and hail.
+  id: 6005
+  time: '2026-06-02T00:17:14.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/661
