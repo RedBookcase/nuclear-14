@@ -66,6 +66,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             subs.Event<RequisitionsBuyMsg>(OnBuy);
             subs.Event<RequisitionsBuyCartMsg>(OnBuyCart);
             subs.Event<RequisitionsPlatformMsg>(OnPlatform);
+            subs.Event<RequisitionsRefreshMsg>(OnRefresh);
         });
     }
 
@@ -102,11 +103,16 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         QueueDel(args.Used);
 
         _audio.PlayPvs(ent.Comp.IncomingSurplus, ent);
-        _popup.PopupEntity(Loc.GetString("rmc-requisitions-deposit", ("amount", value)), ent, args.User);
+        _popup.PopupEntity(Loc.GetString("n14-requisitions-deposit", ("amount", value)), ent, args.User);
         SendUIStateAll();
 
         _adminLogs.Add(LogType.Action, $"{ToPrettyString(args.User):actor} deposited {value} into requisitions account {ent.Comp.Group}");
         args.Handled = true;
+    }
+
+    private void OnRefresh(Entity<RequisitionsComputerComponent> computer, ref RequisitionsRefreshMsg args)
+    {
+        SendUIState(computer);
     }
 
     private void OnBuy(Entity<RequisitionsComputerComponent> computer, ref RequisitionsBuyMsg args)
@@ -323,7 +329,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             flavorText,
             InGameICChatType.Speak,
             ChatTransmitRange.GhostRangeLimit,
-            nameOverride: Loc.GetString("requisition-paperwork-receiver-name"));
+            nameOverride: Loc.GetString("n14-requisition-paperwork-receiver-name"));
 
         _audio.PlayPvs(computerComp.IncomingSurplus, computerEnt);
     }
@@ -420,6 +426,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             foreach (var order in comp.Orders)
             {
                 var crate = SpawnAtPosition(order.Crate, coordinates.Offset(new Vector2(xOffset, yOffset)));
+                EnsureComp<CargoSellBlacklistComponent>(crate);
                 remainingDeliveries--;
 
                 foreach (var prototype in order.Entities)
@@ -528,7 +535,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         }
 
         if (rewards > 0)
-            SendUIFeedback(elevator.Comp.Group, Loc.GetString("requisition-paperwork-reward-message", ("amount", rewards)));
+            SendUIFeedback(elevator.Comp.Group, Loc.GetString("n14-requisition-paperwork-reward-message", ("amount", rewards)));
 
         account.Comp.Balance += rewards;
 

@@ -102,7 +102,14 @@
                               Margin="8 8 8 8"
                               HorizontalExpand="True"
                               VerticalExpand="True">
-                    <RichTextLabel Name="SellInfoLabel" Access="Public" />
+                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                        <RichTextLabel Name="SellInfoLabel" Access="Public" HorizontalExpand="True" />
+                        <Button Name="SellRefreshButton"
+                                Access="Public"
+                                Text="{Loc n14-requisitions-sell-refresh}"
+                                StyleClasses="ButtonSquare"
+                                MinWidth="90" />
+                    </BoxContainer>
                     <Control MinHeight="8" />
                     <Button Name="SellButton"
                             Access="Public"

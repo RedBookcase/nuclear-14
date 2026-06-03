@@ -65,7 +65,7 @@ namespace Content.Server._Nuclear14.Requisitions
                             continue;
 
                         weight += 10;
-                        contentList.AddMarkupOrThrow($"{Loc.GetString("requisition-paper-print-content",
+                        contentList.AddMarkupOrThrow($"{Loc.GetString("n14-requisition-paper-print-content",
                             ("count", entity.Count),
                             ("item", entity.Name.ToUpper()))}");
 
@@ -79,10 +79,10 @@ namespace Content.Server._Nuclear14.Requisitions
             }
 
             _metaSystem.SetEntityName(printedPaper, Loc.GetString(
-                "requisition-paper-print-name", ("name", orderName)));
+                "n14-requisition-paper-print-name", ("name", orderName)));
 
             _paperSystem.SetContent(printedPaper, Loc.GetString(
-                "requisition-paper-print-manifest",
+                "n14-requisition-paper-print-manifest",
                 ("containerName", orderName.ToUpper()),
                 ("content", contentList.ToMarkup()),
                 ("weight", weight),

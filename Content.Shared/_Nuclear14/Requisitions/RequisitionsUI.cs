@@ -50,3 +50,6 @@ public sealed class RequisitionsPlatformMsg(bool raise) : BoundUserInterfaceMess
 {
     public bool Raise = raise;
 }
+
+[Serializable, NetSerializable]
+public sealed class RequisitionsRefreshMsg : BoundUserInterfaceMessage;

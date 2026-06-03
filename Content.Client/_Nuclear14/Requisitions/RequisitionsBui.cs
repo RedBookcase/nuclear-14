@@ -65,6 +65,7 @@ public sealed class RequisitionsBui : BoundUserInterface
             if (_state is { PlatformLowered: Raised, Busy: false })
                 SendMessage(new RequisitionsPlatformMsg(false));
         };
+        _window.SellRefreshButton.OnPressed += _ => SendMessage(new RequisitionsRefreshMsg());
     }
 
     public void Refresh()

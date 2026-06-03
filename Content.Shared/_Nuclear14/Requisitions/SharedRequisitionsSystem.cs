@@ -135,22 +135,39 @@ public abstract class SharedRequisitionsSystem : EntitySystem
             }
         }
 
-        computer.Comp.PlatformLowered = mode;
-        computer.Comp.Busy = busy;
-        computer.Comp.BusyStart = busyStart;
-        computer.Comp.BusyEnd = busyEnd;
-        computer.Comp.Linked = elevator != null && account != null;
-        computer.Comp.Balance = balance;
-        computer.Comp.Full = full;
-        computer.Comp.OrderCount = orderCount;
-        computer.Comp.Capacity = capacity;
-        computer.Comp.PlatformSaleValue = saleValue;
-        computer.Comp.PlatformSaleCount = saleCount;
-        computer.Comp.Purchased = account != null ? new Dictionary<string, int>(account.Purchased) : new Dictionary<string, int>();
-        computer.Comp.History = account != null ? new List<RequisitionsHistoryEntry>(account.History) : new List<RequisitionsHistoryEntry>();
-        computer.Comp.CompletedBounties = account != null ? new List<string>(account.CompletedBounties) : new List<string>();
-        computer.Comp.PendingOrders = pendingOrders;
-        Dirty(computer);
+        var comp = computer.Comp;
+        comp.PlatformLowered = mode;
+        comp.Busy = busy;
+        comp.BusyStart = busyStart;
+        comp.BusyEnd = busyEnd;
+        comp.Linked = elevator != null && account != null;
+        comp.Balance = balance;
+        comp.Full = full;
+        comp.OrderCount = orderCount;
+        comp.Capacity = capacity;
+        comp.PlatformSaleValue = saleValue;
+        comp.PlatformSaleCount = saleCount;
+        comp.Purchased = account != null ? new Dictionary<string, int>(account.Purchased) : new Dictionary<string, int>();
+        comp.History = account != null ? new List<RequisitionsHistoryEntry>(account.History) : new List<RequisitionsHistoryEntry>();
+        comp.CompletedBounties = account != null ? new List<string>(account.CompletedBounties) : new List<string>();
+        comp.PendingOrders = pendingOrders;
+
+        var uid = computer.Owner;
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.PlatformLowered));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.Busy));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.BusyStart));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.BusyEnd));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.Linked));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.Balance));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.Full));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.OrderCount));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.Capacity));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.PlatformSaleValue));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.PlatformSaleCount));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.Purchased));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.History));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.CompletedBounties));
+        DirtyField(uid, comp, nameof(RequisitionsComputerComponent.PendingOrders));
     }
 
     protected virtual int AppraisePlatform(Entity<RequisitionsElevatorComponent> elevator, out int count)
