@@ -33,23 +33,34 @@ n14-requisitions-search-placeholder = Search...
 n14-requisitions-tab-products = Catalog
 n14-requisitions-tab-cart = Cart
 n14-requisitions-tab-sell = Sell
+n14-requisitions-tab-storage = Storage
 n14-requisitions-tab-pending = Pending
 n14-requisitions-tab-history = History
 n14-requisitions-tab-bounties = Bounties
 
 # Bounties
 n14-requisitions-bounties-empty = No bounties posted.
-n14-requisitions-bounty-row = {$item}  [color=#5fbf5f]({$done}/{$amount})[/color] → [color=#33FF33]${$reward}[/color]
-n14-requisitions-bounty-row-done = [color=#1a5c1a]{$item} ({$amount}/{$amount}) → ${$reward} ✓ COMPLETE[/color]
+n14-requisitions-bounty-reward-cash = ${$reward}
+n14-requisitions-bounty-row = {$item}  [color=#5fbf5f]({$done}/{$amount})[/color] → [color=#33FF33]{$reward}[/color]
+n14-requisitions-bounty-row-done = [color=#1a5c1a]{$item} ({$amount}/{$amount}) → {$reward} ✓ COMPLETE[/color]
 
 # History
 n14-requisitions-history-empty = No orders yet.
-n14-requisitions-history-row = {$buyer}: {$amount}x {$item} (${$cost})
+n14-requisitions-history-row-bought = {$buyer}: bought {$amount}x {$item} ([color=#cf2f2f]-${$cost}[/color])
+n14-requisitions-history-row-sold = sold {$amount}x {$item} ([color=#33FF33]+${$cost}[/color])
+n14-requisitions-history-print = Print transcript
 
 # Sell
-n14-requisitions-sell-lower = Lower platform & sell
-n14-requisitions-sell-lower-value = Lower & sell (${$value})
+n14-requisitions-sell-onplatform = On the platform
+n14-requisitions-sell-item = {$item}  [color=#5fbf5f]x{$count}[/color]  [color=#33FF33]${$value}[/color]
+n14-requisitions-sell-item-trade = {$item}  [color=#5fbf5f]x{$count}[/color]  [color=#33FF33]trade[/color]
+n14-requisitions-sell-total = [bold]Appraised total: ${$value}[/bold]  (lower the platform to sell)
 n14-requisitions-sell-refresh = Refresh
+# Storage
+n14-requisitions-storage-empty = Storage is empty. Trade goods on the platform to fill it.
+n14-requisitions-storage-item = {$item}  [color=#5fbf5f]x{$count}[/color]
+n14-requisitions-storage-bring-up = Bring up
+n14-requisitions-storage-withdraw = Bring up everything
 n14-requisitions-sell-info = [bold]On platform:[/bold] {$count} item(s), appraised at ${$value}
 n14-requisitions-sell-no-platform = No platform linked.
 n14-requisitions-sell-raise-first = Raise the platform, place crates on it, then lower to sell.
