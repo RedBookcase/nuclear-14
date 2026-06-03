@@ -477,7 +477,6 @@
           factions:
             - PlayerSuperMutant
             - Enclave
-            - Wastelander
         - type: PowerArmorProficiency
 - type: startingGear
   id: SuperMutantEnclaveGear
