@@ -466,6 +466,8 @@
   spawnLoadout: true
   applyTraits: true
   startingGear: SuperMutantEnclaveGear
+  accessGroups:
+  - EnclaveEnlisted
   requirements:
     - !type:CharacterSpeciesRequirement
       species:

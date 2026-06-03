@@ -410,6 +410,21 @@
     tags:
     - HidesHair
     - HidesBeard
+  # #Misfits Change - Enclave tactical HUD
+  - type: WastelandMap
+    mapTexturePath: _Misfits/Maps/wendover_map.png
+    mapTitle: Enclave Tactical HUD
+    # #Misfits Fix - Match the corrected Wendover AABB so helmet-linked tactical markers align with the map art.
+    worldBounds: "-517,-308,484,311"
+    tacticalFeed: Enclave
+    compactHud: true
+  - type: WastelandMapAction
+    requiredSlot: HEAD
+  - type: UserInterface
+    interfaces:
+      enum.WastelandMapUiKey.Key:
+        type: WastelandMapBoundUserInterface
+  # End Misfits Change
 
 - type: entity
   parent: N14ClothingHeadHelmetPowerArmorX01
