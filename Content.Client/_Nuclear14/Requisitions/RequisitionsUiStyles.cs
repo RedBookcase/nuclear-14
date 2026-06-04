@@ -16,7 +16,6 @@ public static class RequisitionsUiStyles
     public const string Card = "N14RequisitionsCard";
     public const string SidePanel = "N14RequisitionsSidePanel";
 
-    // Fallout terminal palette (matches the holotape/terminal UI).
     public static readonly Color Green = Color.FromHex("#33FF33");
     public static readonly Color TextDim = Color.FromHex("#5fbf5f");
     public static readonly Color DimGreen = Color.FromHex("#1a5c1a");

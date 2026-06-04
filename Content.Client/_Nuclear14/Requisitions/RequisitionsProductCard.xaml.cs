@@ -14,10 +14,8 @@ public sealed partial class RequisitionsProductCard : BoxContainer
     public RequisitionsProductCard()
     {
         RobustXamlLoader.Load(this);
-        RequisitionsUiStyles.ApplyQuantityButton(RemoveButton);
-        RequisitionsUiStyles.ApplyQuantityButton(AddButton);
-        RequisitionsUiStyles.ApplyQuantityButton(Add10Button);
-        RequisitionsUiStyles.ApplyQuantityButton(MaxButton);
+        foreach (var btn in new[] { RemoveButton, AddButton, MaxButton })
+            RequisitionsUiStyles.ApplyQuantityButton(btn);
         Cost.Modulate = RequisitionsUiStyles.Green;
         Quantity.Modulate = RequisitionsUiStyles.Green;
         MouseFilter = MouseFilterMode.Pass;

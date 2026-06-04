@@ -1,7 +1,6 @@
 <controls:RequisitionsWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._Nuclear14.Requisitions"
-    xmlns:uiControls="clr-namespace:Content.Client.UserInterface.Controls"
     Title="{Loc n14-requisitions-window-title}"
     SetSize="900 650"
     MinSize="780 560">
@@ -19,7 +18,6 @@
                 <Button Name="PlatformButton"
                         Access="Public"
                         Text="{Loc n14-requisitions-platform-raise}"
-
                         HorizontalExpand="True" />
                 <ProgressBar Name="PlatformProgress"
                              Access="Public"
@@ -87,13 +85,11 @@
                         <Button Name="ClearCartButton"
                                 Access="Public"
                                 Text="{Loc n14-requisitions-cart-clear}"
-        
                                 MinWidth="120" />
                         <Control MinWidth="5" />
                         <Button Name="BuyButton"
                                 Access="Public"
                                 Text="{Loc n14-requisitions-buy}"
-        
                                 MinWidth="120" />
                     </BoxContainer>
                 </BoxContainer>
@@ -107,7 +103,6 @@
                         <Button Name="SellRefreshButton"
                                 Access="Public"
                                 Text="{Loc n14-requisitions-sell-refresh}"
-        
                                 MinWidth="90" />
                     </BoxContainer>
                     <Control MinHeight="4" />
@@ -151,7 +146,6 @@
                     <Button Name="WithdrawButton"
                             Access="Public"
                             Text="{Loc n14-requisitions-storage-withdraw}"
-    
                             HorizontalAlignment="Left"
                             MinWidth="180" />
                 </BoxContainer>
@@ -188,7 +182,6 @@
                     <Button Name="PrintHistoryButton"
                             Access="Public"
                             Text="{Loc n14-requisitions-history-print}"
-    
                             HorizontalAlignment="Left"
                             MinWidth="160" />
                 </BoxContainer>

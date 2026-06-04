@@ -226,7 +226,7 @@ public sealed class RequisitionsBui : BoundUserInterface
         var bounties = _state?.Bounties;
         var sig = bounties == null
             ? "x"
-            : $"{string.Join(";", bounties.Select(b => $"{b.Id}|{b.Amount}|{b.Reward}|{b.RewardCrate}"))}#{string.Join(",", _state?.CompletedBounties ?? new List<string>())}#{DictSignature(_state?.BountyProgress)}";
+            : $"{string.Join(";", bounties.Select(b => $"{b.Id}|{b.Amount}|{b.Reward}|{b.RewardCrate}"))}#{string.Join(",", _state?.CompletedBounties ?? [])}#{DictSignature(_state?.BountyProgress)}";
         if (!RenderChanged("bounties", sig))
             return;
 
@@ -269,7 +269,7 @@ public sealed class RequisitionsBui : BoundUserInterface
                     ("reward", rewardText));
             }
 
-            var rewardIcons = rewardCrate is { } rc ? new List<EntProtoId> { rc } : null;
+            var rewardIcons = rewardCrate is { } rc ? [rc] : (List<EntProtoId>?) null;
             _window.BountiesContainer.AddChild(MakeIconRow(bounty.Item.Id, markup, rewardIcons));
         }
     }
@@ -383,8 +383,6 @@ public sealed class RequisitionsBui : BoundUserInterface
         PopulatePendingOrders();
     }
 
-    // Returns true (and caches) when a section's inputs differ from the last render, so callers can
-    // skip rebuilding unchanged tabs instead of disposing and re-creating every row on each delta.
     private bool RenderChanged(string key, string signature)
     {
         if (_renderSigs.TryGetValue(key, out var prev) && prev == signature)
@@ -586,7 +584,6 @@ public sealed class RequisitionsBui : BoundUserInterface
 
                 card.AddButton.OnPressed += _ => AddToCart(key);
                 card.RemoveButton.OnPressed += _ => RemoveFromCart(key);
-                card.Add10Button.OnPressed += _ => AddToCart(key, 10);
                 card.MaxButton.OnPressed += _ => AddToCart(key, int.MaxValue);
 
                 _productCards[key] = card;
@@ -704,15 +701,7 @@ public sealed class RequisitionsBui : BoundUserInterface
         var search = _window.SearchBar.Text.Trim();
         var scopedItems = 0;
         var visibleItems = 0;
-        var items = _cart.Select(pair => (pair.Key, pair.Value)).ToList();
-
-        items.Sort((a, b) =>
-        {
-            var categoryComparison = a.Key.Category.CompareTo(b.Key.Category);
-            return categoryComparison != 0
-                ? categoryComparison
-                : a.Key.Entry.CompareTo(b.Key.Entry);
-        });
+        var items = _cart.OrderBy(p => p.Key.Category).ThenBy(p => p.Key.Entry).Select(p => (p.Key, p.Value)).ToList();
 
         foreach (var (key, amount) in items)
         {
@@ -863,7 +852,6 @@ public sealed class RequisitionsBui : BoundUserInterface
         card.RemoveButton.Disabled = amount <= 0;
         var canAdd = TryGetEntry(key, out var entry) && CanAdd(key, entry);
         card.AddButton.Disabled = !canAdd;
-        card.Add10Button.Disabled = !canAdd;
         card.MaxButton.Disabled = !canAdd;
     }
 

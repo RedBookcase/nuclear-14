@@ -23,20 +23,20 @@ public sealed partial class RequisitionsWindow : DefaultWindow
         Stylesheet = RequisitionsUiStyles.Create();
         ShopTabs.StyleClasses.Add(RequisitionsUiStyles.ShopTabs);
 
-        RequisitionsUiStyles.ApplyQuantityButton(PlatformButton);
-        RequisitionsUiStyles.ApplyQuantityButton(ClearCartButton);
-        RequisitionsUiStyles.ApplyQuantityButton(BuyButton);
-        RequisitionsUiStyles.ApplyQuantityButton(SellRefreshButton);
-        RequisitionsUiStyles.ApplyQuantityButton(WithdrawButton);
-        RequisitionsUiStyles.ApplyQuantityButton(PrintHistoryButton);
+        foreach (var btn in new[] { PlatformButton, ClearCartButton, BuyButton, SellRefreshButton, WithdrawButton, PrintHistoryButton })
+            RequisitionsUiStyles.ApplyQuantityButton(btn);
 
-        TabContainer.SetTabTitle(ProductsTab, Loc.GetString("n14-requisitions-tab-products"));
-        TabContainer.SetTabTitle(CartTab, Loc.GetString("n14-requisitions-tab-cart"));
-        TabContainer.SetTabTitle(SellTab, Loc.GetString("n14-requisitions-tab-sell"));
-        TabContainer.SetTabTitle(StorageTab, Loc.GetString("n14-requisitions-tab-storage"));
-        TabContainer.SetTabTitle(PendingTab, Loc.GetString("n14-requisitions-tab-pending"));
-        TabContainer.SetTabTitle(HistoryTab, Loc.GetString("n14-requisitions-tab-history"));
-        TabContainer.SetTabTitle(BountiesTab, Loc.GetString("n14-requisitions-tab-bounties"));
+        foreach (var (tab, key) in new (Control, string)[]
+        {
+            (ProductsTab,  "n14-requisitions-tab-products"),
+            (CartTab,      "n14-requisitions-tab-cart"),
+            (SellTab,      "n14-requisitions-tab-sell"),
+            (StorageTab,   "n14-requisitions-tab-storage"),
+            (PendingTab,   "n14-requisitions-tab-pending"),
+            (HistoryTab,   "n14-requisitions-tab-history"),
+            (BountiesTab,  "n14-requisitions-tab-bounties"),
+        })
+            TabContainer.SetTabTitle(tab, Loc.GetString(key));
     }
 
     public void SetPlatformBusy(TimeSpan? start, TimeSpan? end)
