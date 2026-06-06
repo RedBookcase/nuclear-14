@@ -35,13 +35,18 @@ public sealed class SolutionTransferSystem : EntitySystem
 
         SubscribeLocalEvent<SolutionTransferComponent, GetVerbsEvent<AlternativeVerb>>(AddSetTransferVerbs);
         SubscribeLocalEvent<SolutionTransferComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<SolutionTransferComponent, TransferAmountSetValueMessage>(OnTransferAmountSetValueMessage);
+
+        Subs.BuiEvents<SolutionTransferComponent>(TransferAmountUiKey.Key, subs =>
+        {
+            subs.Event<TransferAmountSetValueMessage>(OnTransferAmountSetValueMessage);
+        });
     }
 
     private void OnTransferAmountSetValueMessage(Entity<SolutionTransferComponent> ent, ref TransferAmountSetValueMessage message)
     {
         var newTransferAmount = FixedPoint2.Clamp(message.Value, ent.Comp.MinimumTransferAmount, ent.Comp.MaximumTransferAmount);
         ent.Comp.TransferAmount = newTransferAmount;
+        Dirty(ent);
 
         if (message.Actor is { Valid: true } user)
             _popup.PopupClient(Loc.GetString("comp-solution-transfer-set-amount", ("amount", newTransferAmount)), ent, user);

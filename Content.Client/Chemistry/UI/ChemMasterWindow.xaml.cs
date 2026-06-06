@@ -13,6 +13,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared.FixedPoint;
 using Robust.Client.Graphics;
+using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.Chemistry.UI
@@ -50,6 +51,14 @@ namespace Content.Client.Chemistry.UI
             AmountLineEdit.OnTextEntered += SetAmount;
             AmountLineEdit.OnFocusExit += SetAmount;
 
+            InputEjectButton.Mode = ActionMode.Press;
+            BufferTransferButton.Mode = ActionMode.Press;
+            BufferDiscardButton.Mode = ActionMode.Press;
+            PillBufferTransferButton.Mode = ActionMode.Press;
+            PillBufferDiscardButton.Mode = ActionMode.Press;
+            CreatePillButton.Mode = ActionMode.Press;
+            CreateBottleButton.Mode = ActionMode.Press;
+
             // Pill type selection buttons, in total there are 20 pills.
             // Pill rsi file should have states named as pill1, pill2, and so on.
             var resourcePath = new ResPath(PillsRsiPath);
@@ -74,7 +83,8 @@ namespace Content.Client.Chemistry.UI
                     Access = AccessLevel.Public,
                     StyleClasses = { styleBase },
                     MaxSize = new Vector2(42, 28),
-                    Group = pillTypeGroup
+                    Group = pillTypeGroup,
+                    Mode = ActionMode.Press
                 };
 
                 // Generate buttons textures
@@ -152,7 +162,8 @@ namespace Content.Client.Chemistry.UI
                     Text = amount.ToString(),
                     MinSize = new(10, 10),
                     StyleClasses = { styleClass },
-                    HorizontalExpand = true
+                    HorizontalExpand = true,
+                    Mode = ActionMode.Press
                 };
 
                 button.OnPressed += _ => OnAmountButtonPressed?.Invoke(amount);
@@ -552,6 +563,7 @@ namespace Content.Client.Chemistry.UI
             Text = text;
             Id = id;
             IsBuffer = isBuffer;
+            Mode = ActionMode.Press;
         }
     }
 
