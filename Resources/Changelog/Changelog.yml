@@ -6622,3 +6622,10 @@ Entries:
   id: 6031
   time: '2026-06-07T15:05:15.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/712
+- author: Bradysgaming
+  changes:
+    - type: Add
+      message: Added roundstart gloves boots and armor for 80's roles
+  id: 6032
+  time: '2026-06-07T22:11:29.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/722
