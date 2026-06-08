@@ -66,7 +66,7 @@
     state: marksman
   - type: UndecidedLoadoutBackpack
     possibleSets:
-    - Eighties_RoadRashRunnerSet
+#    - Eighties_RoadRashRunnerSet
     - Eighties_RoadRashScrapperSet
     - Eighties_RoadRashLookoutSet
 
@@ -190,15 +190,15 @@
   content:
   - KitEighties_OilersPatch
 
-- type: UndecidedLoadoutBackpackSet
-  id: Eighties_RoadRashRunnerSet
-  name: undecided-loadout-category-misfits-eighties-road-rash-runner-name
-  description: undecided-loadout-category-misfits-eighties-road-rash-runner-description
-  sprite:
-    sprite: _Nuclear14/Objects/Misc/kits.rsi
-    state: marksman
-  content:
-  - KitEighties_RoadRashRunner
+#- type: UndecidedLoadoutBackpackSet
+#  id: Eighties_RoadRashRunnerSet
+#  name: undecided-loadout-category-misfits-eighties-road-rash-runner-name
+#  description: undecided-loadout-category-misfits-eighties-road-rash-runner-description
+#  sprite:
+#    sprite: _Nuclear14/Objects/Misc/kits.rsi
+#    state: marksman
+#  content:
+#  - KitEighties_RoadRashRunner
 
 - type: UndecidedLoadoutBackpackSet
   id: Eighties_RoadRashScrapperSet
