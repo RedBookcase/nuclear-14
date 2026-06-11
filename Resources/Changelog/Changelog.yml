@@ -6781,3 +6781,14 @@ Entries:
   id: 6047
   time: '2026-06-11T02:45:50.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/747
+- author: Squagg
+  changes:
+    - type: Add
+      message: Pins can now be attached to uniforms and outer clothing.
+    - type: Tweak
+      message: Rank pins attached to clothing now apply rank titles.
+    - type: Tweak
+      message: Examining someone with a rank pin now shows their rank directly.
+  id: 6048
+  time: '2026-06-11T20:08:35.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/750
