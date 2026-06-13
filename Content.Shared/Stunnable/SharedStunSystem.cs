@@ -137,27 +137,26 @@ public abstract class SharedStunSystem : EntitySystem
     }
 
     private void OnKnockInit(EntityUid uid, KnockedDownComponent component, ComponentInit args)
-    {
-        RaiseNetworkEvent(new CheckAutoGetUpEvent(GetNetEntity(uid)));
-        _layingDown.TryLieDown(uid, null, null, component.DropHeldItemsBehavior);
-    }
+//i snorted like 4 lines of coke and in my junk indused coma God Howard came down and told me fr no cap this is the hack to
+//finally fix the funny aaah spessman going sideways using StandingStateComponent black magic directly instead of piggybacking on dogpoopoo code.
+//if this doesn't work, dont show up to req line on RMC this weekend, brady   -pierow
+//p.s. also stamina damage might break ts so let's just hope that never gets reworked l0l
+{
+    _standingState.Down(
+        uid,
+        playSound: true,
+        dropHeldItems: component.DropHeldItemsBehavior != DropHeldItemsBehavior.NoDrop);
+}
 
-    private void OnKnockShutdown(EntityUid uid, KnockedDownComponent component, ComponentShutdown args)
-    {
-        if (!TryComp(uid, out StandingStateComponent? standing))
-            return;
+private void OnKnockShutdown(EntityUid uid, KnockedDownComponent component, ComponentShutdown args)
+{
+    if (!TryComp(uid, out StandingStateComponent? standing))
+        return;
 
-        if (TryComp(uid, out LayingDownComponent? layingDown))
-        {
-            if (layingDown.AutoGetUp && !_container.IsEntityInContainer(uid))
-                _layingDown.TryStandUp(uid, layingDown);
-            return;
-        }
+    _standingState.Stand(uid, standing, force: true);
+}
 
-        _standingState.Stand(uid, standing);
-    }
-
-    private void OnStandAttempt(EntityUid uid, KnockedDownComponent component, StandAttemptEvent args)
+private void OnStandAttempt(EntityUid uid, KnockedDownComponent component, StandAttemptEvent args)
     {
         if (component.LifeStage <= ComponentLifeStage.Running)
             args.Cancel();
