@@ -79,7 +79,6 @@ public sealed partial class HolotapeWindow : DefaultWindow
     private readonly Dictionary<string, bool> _overwatchGroupExpanded = new();
     private readonly FixedEye _overwatchDefaultEye = new();
     private readonly FixedEye _overwatchFeedEye = new();
-    private bool _overwatchNightVisionEnabled;
 
     // #Misfits Add - Database state cache (latest server push). Used by all DB rendering paths.
     private TerminalDatabaseState? _databaseState;
@@ -112,12 +111,10 @@ public sealed partial class HolotapeWindow : DefaultWindow
         SepDatabaseActions.PanelOverride = new StyleBoxFlat(Color.FromHex("#0f3d0f"));
         SepOverwatch.PanelOverride = new StyleBoxFlat(Color.FromHex("#0f3d0f"));
         OverwatchCameraFallback.PanelOverride = new StyleBoxFlat(Color.FromHex("#050805"));
-        OverwatchNightVisionOverlay.PanelOverride = new StyleBoxFlat(new Color(0.18f, 0.55f, 0.18f, 0.14f));
         OverwatchCameraView.ViewportSize = new Vector2i(640, 360);
         OverwatchCameraView.Eye = _overwatchDefaultEye;
         LayoutContainer.SetAnchorPreset(OverwatchCameraView, LayoutContainer.LayoutPreset.Wide);
         LayoutContainer.SetAnchorPreset(OverwatchCameraFallback, LayoutContainer.LayoutPreset.Wide);
-        LayoutContainer.SetAnchorPreset(OverwatchNightVisionOverlay, LayoutContainer.LayoutPreset.Wide);
 
         // Tab button styling
         DataTabButton.OnPressed += _ => SwitchToDataTab();
@@ -128,12 +125,6 @@ public sealed partial class HolotapeWindow : DefaultWindow
         DatabaseTabButton.OnPressed += _ => SwitchToDatabaseTab();
         OverwatchTabButton.OnPressed += _ => SwitchToOverwatchTab();
         OverwatchStopWatchingButton.OnPressed += _ => OnOverwatchAction?.Invoke(OverwatchConsoleMessageType.Unwatch, null);
-        OverwatchNightVisionButton.OnToggled += args =>
-        {
-            _overwatchNightVisionEnabled = args.Pressed;
-            UpdateOverwatchNightVisionButton();
-            SyncOverwatchFeedEye();
-        };
         OverwatchSearchBar.OnTextChanged += _ => RefreshOverwatchView();
 
         // Submit button
@@ -151,7 +142,6 @@ public sealed partial class HolotapeWindow : DefaultWindow
         BBBulletButton.OnPressed += _ => WrapBBCode("[bullet] ", string.Empty);
         BBColorButton.OnPressed += _ => WrapBBCode("[color=#33FF33]", "[/color]");
         BBClearButton.OnPressed += _ => StripBBCode();
-        UpdateOverwatchNightVisionButton();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -503,7 +493,6 @@ public sealed partial class HolotapeWindow : DefaultWindow
 
         OverwatchNoPersonnelLabel.Visible = visibleEntries.Count == 0;
         OverwatchStopWatchingButton.Disabled = _overwatchState.WatchedNumber == null;
-        OverwatchNightVisionButton.Disabled = _overwatchState.WatchedNumber == null;
         SetTerminalMarkup(OverwatchRosterSummaryLabel,
             _overwatchState.Personnel.Count == 0
                 ? $"[color={TermDimGreen}]No linked personnel detected.[/color]"
@@ -603,7 +592,6 @@ public sealed partial class HolotapeWindow : DefaultWindow
         {
             HorizontalExpand = true,
             StyleBoxOverride = rowStyle,
-            ToolTip = active ? "Stop watching this feed" : "Watch this feed",
         };
         row.OnPressed += _ => OnOverwatchAction?.Invoke(
             active ? OverwatchConsoleMessageType.Unwatch : OverwatchConsoleMessageType.Watch,
@@ -699,10 +687,7 @@ public sealed partial class HolotapeWindow : DefaultWindow
     private void SyncOverwatchFeedEye()
     {
         if (_overwatchSourceEye == null)
-        {
-            OverwatchNightVisionOverlay.Visible = false;
             return;
-        }
 
         _overwatchFeedEye.Position = _overwatchSourceEye.Position;
         _overwatchFeedEye.Offset = _overwatchSourceEye.Offset;
@@ -710,14 +695,6 @@ public sealed partial class HolotapeWindow : DefaultWindow
         _overwatchFeedEye.Zoom = _overwatchSourceEye.Zoom;
         _overwatchFeedEye.DrawFov = _overwatchSourceEye.DrawFov;
         _overwatchFeedEye.DrawLight = _overwatchSourceEye.DrawLight;
-        OverwatchNightVisionOverlay.Visible = _overwatchNightVisionEnabled && OverwatchCameraView.Visible;
-    }
-
-    private void UpdateOverwatchNightVisionButton()
-    {
-        OverwatchNightVisionButton.Text = _overwatchNightVisionEnabled
-            ? "[ NIGHT VISION: ON ]"
-            : "[ NIGHT VISION: OFF ]";
     }
 
     private bool TryGetCurrentOverwatchEntry(out OverwatchConsoleEntry entry)

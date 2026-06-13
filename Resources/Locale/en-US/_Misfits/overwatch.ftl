@@ -1,5 +1,3 @@
-# #Misfits Add - Overwatch localization strings.
-
 overwatch-console-window-title = Overwatch Console
 overwatch-console-subtitle = Remote command uplink for linked vault personnel.
 overwatch-console-feed-label = Active Feed

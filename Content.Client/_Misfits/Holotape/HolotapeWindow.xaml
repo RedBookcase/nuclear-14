@@ -180,17 +180,10 @@
                     <PanelContainer MinWidth="1" VerticalExpand="True" />
 
                     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="6">
-                        <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True">
-                            <Button Name="OverwatchStopWatchingButton"
-                                    Text="[ STOP WATCH ]"
-                                    HorizontalAlignment="Left"
-                                    MinWidth="140" />
-                            <Button Name="OverwatchNightVisionButton"
-                                    Text="[ NIGHT VISION: OFF ]"
-                                    ToggleMode="True"
-                                    HorizontalAlignment="Left"
-                                    MinWidth="180" />
-                        </BoxContainer>
+                        <Button Name="OverwatchStopWatchingButton"
+                                Text="[ STOP WATCH ]"
+                                HorizontalAlignment="Left"
+                                MinWidth="140" />
                         <LayoutContainer Name="OverwatchCameraViewBox"
                                          MinSize="320 220"
                                          HorizontalExpand="True"
@@ -209,11 +202,6 @@
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center" />
                             </PanelContainer>
-                            <PanelContainer Name="OverwatchNightVisionOverlay"
-                                            Visible="False"
-                                            VerticalExpand="True"
-                                            HorizontalExpand="True"
-                                            MouseFilter="Ignore" />
                         </LayoutContainer>
                         <RichTextLabel Name="OverwatchStatusLabel"
                                        StyleClasses="monospace"
