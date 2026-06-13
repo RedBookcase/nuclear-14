@@ -457,7 +457,7 @@
   requirements:
     - !type:CharacterPlaytimeRequirement
       tracker: Wastelander
-     min: 24000
+      min: 24000
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutOuter
     - !type:CharacterDepartmentRequirement # Forge-Change
