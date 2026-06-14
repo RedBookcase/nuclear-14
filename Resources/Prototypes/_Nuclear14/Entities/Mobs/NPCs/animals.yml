@@ -694,9 +694,9 @@
   - type: HTN
     rootTask:
      task: RuminantHostileCompound
-     blackboard:
-     NavSmash: !type:Bool
-       true
+      blackboard:
+      NavSmash: !type:Bool
+        true
  #- type: Reproductive
    #breedChance: 0.05
    #birthPopup: reproductive-birth-popup
