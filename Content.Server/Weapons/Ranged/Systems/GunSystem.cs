@@ -226,7 +226,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
                             lastHit = hit;
 
-                            FireEffects(fromEffect, distance, dir.Normalized().ToAngle(), hitscan, hit);
+                            FireEffects(fromEffect, distance, dir.Normalized().ToAngle(), hitscan, hit, userSession);
 
                             var ev = new HitScanReflectAttemptEvent(user, gunUid, hitscan.Reflective, dir, false);
                             RaiseLocalEvent(hit, ref ev);
@@ -295,7 +295,7 @@ public sealed partial class GunSystem : SharedGunSystem
                     }
                     else
                     {
-                        FireEffects(fromEffect, hitscan.MaxLength, dir.ToAngle(), hitscan);
+                        FireEffects(fromEffect, hitscan.MaxLength, dir.ToAngle(), hitscan, shooterSession: userSession);
                     }
 
                     if (lastHit != null && user != null)
@@ -622,7 +622,12 @@ public sealed partial class GunSystem : SharedGunSystem
     // TODO: Pseudo RNG so the client can predict these.
     #region Hitscan effects
 
-    private void FireEffects(EntityCoordinates fromCoordinates, float distance, Angle mapDirection, HitscanPrototype hitscan, EntityUid? hitEntity = null)
+    private void FireEffects(EntityCoordinates fromCoordinates,
+        float distance,
+        Angle mapDirection,
+        HitscanPrototype hitscan,
+        EntityUid? hitEntity = null,
+        ICommonSession? shooterSession = null)
     {
         // Lord
         // Forgive me for the shitcode I am about to do
@@ -675,13 +680,17 @@ public sealed partial class GunSystem : SharedGunSystem
 
         if (sprites.Count > 0)
         {
+            var filter = Filter.Pvs(fromCoordinates, entityMan: EntityManager);
+            if (shooterSession != null)
+                filter.RemovePlayer(shooterSession);
+
             RaiseNetworkEvent(new HitscanEvent
             {
                 Sprites = sprites,
                 TintColor = hitscan.TintColor, // #Misfits Add: forward beam customisation
                 BeamWidth = hitscan.BeamWidth,
                 BeamDuration = hitscan.BeamDuration,
-            }, Filter.Pvs(fromCoordinates, entityMan: EntityManager));
+            }, filter);
         }
     }
 

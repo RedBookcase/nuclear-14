@@ -123,7 +123,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             (EntityManager.EntityExists(component.Shooter) || EntityManager.EntityExists(component.Weapon)))
         {
             if (modifiedDamage.AnyPositive() && !deleted)
-                _color.RaiseEffect(Color.Red, [target], filter);
+                    _color.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
 
             var source = EntityManager.EntityExists(component.Shooter)
                 ? component.Shooter!.Value

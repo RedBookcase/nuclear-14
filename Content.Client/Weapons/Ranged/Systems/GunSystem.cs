@@ -8,8 +8,10 @@ using Content.Client.Items;
 using Content.Client.Weapons.Ranged.Components;
 using Content.Shared.Camera;
 using Content.Shared.CombatMode;
+using Content.Shared.Damage.Components;
 using Content.Shared.Mech.Components; // Goobstation
 using Content.Shared.Projectiles;
+using Content.Shared._Misfits.Weapons;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -25,6 +27,7 @@ using Robust.Shared.Animations;
 using Robust.Shared.Input;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -110,52 +113,10 @@ public sealed partial class GunSystem : SharedGunSystem
 
     private void OnHitscan(HitscanEvent ev)
     {
-        // ALL I WANT IS AN ANIMATED EFFECT
         foreach (var a in ev.Sprites)
         {
-            if (a.Sprite is not SpriteSpecifier.Rsi rsi)
-                continue;
-
             var coords = GetCoordinates(a.coordinates);
-
-            if (Deleted(coords.EntityId))
-                continue;
-
-            var ent = Spawn(HitscanProto, coords);
-            var sprite = Comp<SpriteComponent>(ent);
-            var xform = Transform(ent);
-            xform.LocalRotation = a.angle;
-            sprite[EffectLayers.Unshaded].AutoAnimated = false;
-            sprite.LayerSetSprite(EffectLayers.Unshaded, rsi);
-            sprite.LayerSetState(EffectLayers.Unshaded, rsi.RsiState);
-            sprite.Scale = new Vector2(a.Distance, ev.BeamWidth); // #Misfits Change: use configurable beam width
-            sprite[EffectLayers.Unshaded].Visible = true;
-
-            // #Misfits Add: apply optional colour tint from hitscan prototype
-            if (ev.TintColor != null)
-                sprite.LayerSetColor(EffectLayers.Unshaded, ev.TintColor.Value);
-
-            // #Misfits Add: extend the HitscanEffect entity lifetime when beamDuration exceeds the prototype default (2s)
-            if (ev.BeamDuration > 2f && TryComp<TimedDespawnComponent>(ent, out var despawn))
-                despawn.Lifetime = ev.BeamDuration + 0.5f;
-
-            var anim = new Animation()
-            {
-                Length = TimeSpan.FromSeconds(ev.BeamDuration), // #Misfits Change: use configurable beam duration
-                AnimationTracks =
-                {
-                    new AnimationTrackSpriteFlick()
-                    {
-                        LayerKey = EffectLayers.Unshaded,
-                        KeyFrames =
-                        {
-                            new AnimationTrackSpriteFlick.KeyFrame(rsi.RsiState, 0f),
-                        }
-                    }
-                }
-            };
-
-            _animPlayer.Play(ent, anim, "hitscan-effect");
+            SpawnHitscanEffect(coords, a.angle, a.Sprite, a.Distance, ev.TintColor, ev.BeamWidth, ev.BeamDuration);
         }
     }
 
@@ -291,6 +252,7 @@ public sealed partial class GunSystem : SharedGunSystem
                             RemoveShootable(ent.Value);
                         break;
                     case HitscanPrototype:
+                        PredictHitscan(gunUid, fromCoordinates, worldAngle.ToVec(), worldAngle, gun.Target, user);
                         Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
                         Recoil(user, direction, gun.CameraRecoilScalarModified);
                         break;
@@ -396,6 +358,7 @@ public sealed partial class GunSystem : SharedGunSystem
                         RemoveShootable(ent.Value);
                     break;
                 case HitscanPrototype:
+                    PredictHitscan(gunUid, fromCoordinates, mapDirection, mapDirection.ToAngle(), gun.Target, user);
                     Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
                     Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
                     break;
@@ -546,5 +509,141 @@ public sealed partial class GunSystem : SharedGunSystem
         EnsureComp<PredictedProjectileClientComponent>(uid);
         _physics.UpdateIsPredicted(uid);
         base.ShootProjectile(uid, direction, gunVelocity, gunUid, user, speed);
+    }
+
+    private void PredictHitscan(EntityUid gunUid,
+        EntityCoordinates fromCoordinates,
+        Vector2 direction,
+        Angle worldAngle,
+        EntityUid? target,
+        EntityUid? user)
+    {
+        if (!IsLocalShooter(user) || !TryGetGunHitscan(gunUid, out var hitscan))
+            return;
+
+        var fromMap = fromCoordinates.ToMap(EntityManager, TransformSystem);
+        if (fromMap.MapId == MapId.Nullspace || direction.LengthSquared() <= 0.0001f)
+            return;
+
+        var normalizedDirection = direction.Normalized();
+        var ray = new CollisionRay(fromMap.Position, normalizedDirection, hitscan.CollisionMask);
+        var ignoredEntity = GetShotIgnoreEntity(user);
+        var source = ignoredEntity ?? user ?? gunUid;
+        var rayCastResults = Physics.IntersectRay(fromMap.MapId, ray, hitscan.MaxLength, source, false).ToList();
+
+        var distance = hitscan.MaxLength;
+        var firedFromContainer = Containers.IsEntityOrParentInContainer(source);
+        foreach (var result in rayCastResults)
+        {
+            if (!firedFromContainer &&
+                result.HitEntity != target &&
+                CompOrNull<RequireProjectileTargetComponent>(result.HitEntity)?.Active == true)
+            {
+                continue;
+            }
+
+            distance = result.Distance;
+            break;
+        }
+
+        if (distance >= 1f)
+        {
+            if (hitscan.MuzzleFlash != null)
+            {
+                var coords = fromCoordinates.Offset(normalizedDirection / 2f);
+                SpawnHitscanEffect(coords, worldAngle, hitscan.MuzzleFlash, 1f, hitscan.TintColor, hitscan.BeamWidth, hitscan.BeamDuration);
+            }
+
+            if (hitscan.TravelFlash != null)
+            {
+                var coords = fromCoordinates.Offset(normalizedDirection * (distance + 0.5f) / 2f);
+                SpawnHitscanEffect(coords, worldAngle, hitscan.TravelFlash, distance - 1.5f, hitscan.TintColor, hitscan.BeamWidth, hitscan.BeamDuration);
+            }
+        }
+
+        if (hitscan.ImpactFlash != null)
+        {
+            var coords = fromCoordinates.Offset(normalizedDirection * distance);
+            SpawnHitscanEffect(coords, worldAngle.FlipPositive(), hitscan.ImpactFlash, 1f, hitscan.TintColor, hitscan.BeamWidth, hitscan.BeamDuration);
+        }
+    }
+
+    private bool IsLocalShooter(EntityUid? user)
+    {
+        if (_player.LocalEntity is not { } local || user == null)
+            return false;
+
+        if (user == local)
+            return true;
+
+        return TryComp<MechPilotComponent>(local, out var mechPilot) && mechPilot.Mech == user;
+    }
+
+    private bool TryGetGunHitscan(EntityUid gunUid, out HitscanPrototype hitscan)
+    {
+        hitscan = default!;
+
+        if (!TryComp<HitscanBatteryAmmoProviderComponent>(gunUid, out var provider) ||
+            !ProtoManager.TryIndex(provider.Prototype, out HitscanPrototype? baseHitscan))
+        {
+            return false;
+        }
+
+        hitscan = baseHitscan;
+
+        if (TryComp<GunDamageBonusComponent>(gunUid, out var gunOverride) &&
+            gunOverride.HitscanProtoOverride != null &&
+            ProtoManager.TryIndex(gunOverride.HitscanProtoOverride, out HitscanPrototype? overrideHitscan))
+        {
+            hitscan = overrideHitscan;
+        }
+
+        return true;
+    }
+
+    private void SpawnHitscanEffect(EntityCoordinates coords,
+        Angle angle,
+        SpriteSpecifier spriteSpecifier,
+        float distance,
+        Color? tintColor,
+        float beamWidth,
+        float beamDuration)
+    {
+        if (spriteSpecifier is not SpriteSpecifier.Rsi rsi || Deleted(coords.EntityId))
+            return;
+
+        var ent = Spawn(HitscanProto, coords);
+        var sprite = Comp<SpriteComponent>(ent);
+        var xform = Transform(ent);
+        xform.LocalRotation = angle;
+        sprite[EffectLayers.Unshaded].AutoAnimated = false;
+        sprite.LayerSetSprite(EffectLayers.Unshaded, rsi);
+        sprite.LayerSetState(EffectLayers.Unshaded, rsi.RsiState);
+        sprite.Scale = new Vector2(distance, beamWidth);
+        sprite[EffectLayers.Unshaded].Visible = true;
+
+        if (tintColor != null)
+            sprite.LayerSetColor(EffectLayers.Unshaded, tintColor.Value);
+
+        if (beamDuration > 2f && TryComp<TimedDespawnComponent>(ent, out var despawn))
+            despawn.Lifetime = beamDuration + 0.5f;
+
+        var anim = new Animation()
+        {
+            Length = TimeSpan.FromSeconds(beamDuration),
+            AnimationTracks =
+            {
+                new AnimationTrackSpriteFlick()
+                {
+                    LayerKey = EffectLayers.Unshaded,
+                    KeyFrames =
+                    {
+                        new AnimationTrackSpriteFlick.KeyFrame(rsi.RsiState, 0f),
+                    }
+                }
+            }
+        };
+
+        _animPlayer.Play(ent, anim, "hitscan-effect");
     }
 }
