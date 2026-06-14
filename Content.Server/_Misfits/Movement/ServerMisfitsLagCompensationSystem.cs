@@ -2,6 +2,7 @@ using Content.Server.Movement.Systems;
 using Content.Shared._Misfits.CCVar;
 using Content.Shared._Misfits.Movement;
 using Content.Shared.Actions;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -13,7 +14,8 @@ namespace Content.Server._Misfits.Movement;
 
 /// <summary>
 /// Server-side lag compensation system. Piggybacks on the <c>LastRealTick</c> field
-/// already stamped on <see cref="RequestShootEvent"/> and <see cref="RequestPerformActionEvent"/>
+/// already stamped on <see cref="RequestShootEvent"/>, melee attack events, and
+/// <see cref="RequestPerformActionEvent"/>
 /// by the client, storing it per-session. Range-validation calls can then apply a small
 /// tolerance margin when a player's action was sent from a behind-tick snapshot.
 ///
@@ -41,6 +43,9 @@ public sealed class ServerMisfitsLagCompensationSystem : SharedMisfitsLagCompens
         // Read LastRealTick directly from the events the client already sends for game actions.
         // This avoids needing a separate periodic heartbeat message (which caused "Got late MsgEntity" spam).
         SubscribeNetworkEvent<RequestShootEvent>(OnReceiveShootEvent);
+        SubscribeNetworkEvent<LightAttackEvent>(OnReceiveMeleeAttackEvent);
+        SubscribeNetworkEvent<HeavyAttackEvent>(OnReceiveMeleeAttackEvent);
+        SubscribeNetworkEvent<DisarmAttackEvent>(OnReceiveMeleeAttackEvent);
         SubscribeNetworkEvent<RequestPerformActionEvent>(OnReceiveActionEvent);
 
         // Clean up stored ticks when a player disconnects to prevent a slow memory leak.
@@ -66,6 +71,14 @@ public sealed class ServerMisfitsLagCompensationSystem : SharedMisfitsLagCompens
     }
 
     private void OnReceiveActionEvent(RequestPerformActionEvent msg, EntitySessionEventArgs args)
+    {
+        if (msg.LastRealTick is not { } tick)
+            return;
+
+        SetLastRealTick(args.SenderSession.UserId, tick - 1);
+    }
+
+    private void OnReceiveMeleeAttackEvent(AttackEvent msg, EntitySessionEventArgs args)
     {
         if (msg.LastRealTick is not { } tick)
             return;
