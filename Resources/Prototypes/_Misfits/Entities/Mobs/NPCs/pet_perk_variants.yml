@@ -97,6 +97,7 @@
   - type: Hands # #Misfits Add - allows dragging and item handling
   - type: BorgHands # #Misfits Add - gives cats actual holdable hand slots
     handCount: 2
+  - type: ComplexInteraction # #Misfits Add - allows click-opening doors and other complex hand interactions
   - type: InventorySlots
   - type: Strippable
   - type: PetCollarHolder
@@ -360,6 +361,7 @@
   parent: N14MobPetCat
   description: A spoon cat, somehow your companion.
   components:
+  - type: SpoonCatTranslator
   - type: GhostRole
     name: ghost-role-information-n14pet-cat-spoon-name
     description: ghost-role-information-n14pet-generic-description
