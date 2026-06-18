@@ -7390,3 +7390,14 @@ Entries:
   id: 6098
   time: '2026-06-18T02:12:55.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/839
+- author: WazuraWasTaken
+  changes:
+    - type: Add
+      message: 45, 12.7 and the PPsh41 Smgs to Loadout
+    - type: Tweak
+      message: Makeshift Laser Revolver and aer-7 being bos only
+    - type: Tweak
+      message: Armor is Slightly cheaper
+  id: 6099
+  time: '2026-06-18T23:30:55.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/840
