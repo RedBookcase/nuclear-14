@@ -508,29 +508,9 @@
 
 
 - type: loadout
-  id: N14WeaponSMG10mmSuppressed
-  category: Weapons
-  cost: 12
-  requirements:
-    - !type:CharacterItemGroupRequirement
-      group: N14LoadoutGunsBig
-    - !type:CharacterDepartmentRequirement
-      inverted: true
-      departments:
-      - Vault
-    - !type:CharacterJobRequirement
-      inverted: true
-      jobs:
-      - BoSMidSerf
-      - CaesarLegionSlave
-      - NCRPrisoner
-  items:
-    - N14WeaponSMG10mmSuppressed
-
-- type: loadout
   id: N14WeaponSMG45
   category: Weapons
-  cost: 13
+  cost: 12
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutGunsBig
@@ -552,7 +532,7 @@
 - type: loadout
   id: N14WeaponSMG12mm
   category: Weapons
-  cost: 14
+  cost: 13
   requirements:
     - !type:CharacterItemGroupRequirement
       group: N14LoadoutGunsBig
