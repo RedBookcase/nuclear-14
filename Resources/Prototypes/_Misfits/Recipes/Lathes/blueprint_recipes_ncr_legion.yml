@@ -1677,6 +1677,22 @@
     Leather: 100
 
 
+- type: latheRecipe
+  id: N14BPLegionnaireShield
+  result: N14LegionnaireShield
+  category: N14BlueprintLegionWeaponsT2
+  completetime: 10
+  requiresBlueprint: true
+  availableFaction:
+  - CaesarLegion
+  materials:
+    Steel: 1000
+
+    Wood: 2000
+
+    Leather: 200
+
+
 # --- Legion Tier 3 Weapons (Veteran grade) ---
 - type: latheRecipe
   id: N14BPLegionWeaponCeremonialSword

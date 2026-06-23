@@ -283,6 +283,7 @@
     - N14BPLegionWeaponSledgeHammer
     - N14BPLegionWeaponTribalBigClub
     - N14BPLegionWeaponSMGGreaseGun #Misfits Add - .45 ACP SMG
+    - N14BPLegionnaireShield
 
 - type: entity
   parent: N14BlueprintBase
