@@ -7744,3 +7744,10 @@ Entries:
   id: 6132
   time: '2026-06-23T22:50:48.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/885
+- author: Squagg
+  changes:
+    - type: Fix
+      message: Emergency chem buffer bugfix
+  id: 6133
+  time: '2026-06-23T23:47:30.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/886
