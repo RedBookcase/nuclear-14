@@ -7707,3 +7707,10 @@ Entries:
   id: 6127
   time: '2026-06-22T20:52:16.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/878
+- author: Operator
+  changes:
+    - type: Fix
+      message: Welding a motorbike at full HP wont blow it up anymore.
+  id: 6128
+  time: '2026-06-23T21:44:18.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/881
