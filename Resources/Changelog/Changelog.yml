@@ -7863,3 +7863,10 @@ Entries:
   id: 6139
   time: '2026-06-26T00:49:40.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/895
+- author: RedBookcase
+  changes:
+    - type: Add
+      message: Huge Legion kit reworks. New Legion kits. Various bugfixes and changes.
+  id: 6140
+  time: '2026-06-26T01:31:09.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/884
