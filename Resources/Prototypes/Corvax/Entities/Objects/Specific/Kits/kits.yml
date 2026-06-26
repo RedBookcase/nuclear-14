@@ -154,7 +154,7 @@
     size: Huge
   - type: SpawnItemsOnUse
     items:
-      - id: N14SledgeHammer
+      - id: N14WeaponThermospear
       - id: ClothingBeltRope
       - id: N14WeaponRifle556Carbine
       - id: LongMagazine556Rifle
