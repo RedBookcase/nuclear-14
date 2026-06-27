@@ -7917,3 +7917,24 @@ Entries:
   id: 6145
   time: '2026-06-27T00:05:07.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/901
+- author: Bradysgaming
+  changes:
+    - type: Add
+      message: Made Acolyte of mars, a role that the POM commands
+    - type: Tweak
+      message: Made explorer into a recruit role, given more slots
+    - type: Tweak
+      message: tuned down legionary slots to give explorer more.
+    - type: Tweak
+      message: Respective trader + civ roles arent auto enlisted in wars
+    - type: Tweak
+      message: Townsfolk arent auto enlisted
+    - type: Tweak
+      message: Nerfed Tribal warcries by 20%
+    - type: Tweak
+      message: Nerfed heater sheild hp by 50
+    - type: Tweak
+      message: Nerfed Vex armor's pierce by 5%
+  id: 6146
+  time: '2026-06-27T04:28:37.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/904
