@@ -8044,3 +8044,30 @@ Entries:
   id: 6155
   time: '2026-06-28T21:35:36.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/916
+- author: cythisiax
+  changes:
+    - type: Fix
+      message: Supermutants now have footstep sounds.
+    - type: Fix
+      message: EyeBot netSync point out by another contrib
+    - type: Fix
+      message: >-
+        Chinese helmet saying gives NVG, updated desc to say no longer has NVG.
+        Yuh.
+    - type: Fix
+      message: Nerfed Bighorner melee range from 4 > 1
+    - type: Fix
+      message: Riding/Mounted no longer allow you to dig graves.
+    - type: Fix
+      message: >-
+        TryGetActiveWarForOriginalParticipant (Yeah LOL) fixed identifying
+        methods of original war participants. Should no longer softlock raids.
+    - type: Add
+      message: >-
+        _adminLogger.Add(LogType.Verb, LogImpact.Extreme, "AdminName executed
+        the [Tricks Make Indestructible] verb targeting EntityName") example.
+        Plus more. Request by GalaxyCad. System already existed, updated
+        Intensity all from Lows > Med > Extreme.
+  id: 6156
+  time: '2026-06-28T21:36:19.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/913
