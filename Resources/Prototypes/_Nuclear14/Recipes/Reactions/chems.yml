@@ -35,9 +35,9 @@
   id: PlantGrowthMixture
   reactants:
     Dung:
-      amount: 5
+      amount: 2.5
     Fertilizer:
-      amount: 25
+      amount: 5
   products:
     PlantGrowthMixture: 1
 
