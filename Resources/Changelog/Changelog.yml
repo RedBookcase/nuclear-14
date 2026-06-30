@@ -8225,3 +8225,14 @@ Entries:
   id: 6166
   time: '2026-06-30T02:41:11.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/932
+- author: Bradysgaming
+  changes:
+    - type: Add
+      message: Added Off duty bos role, parity of citizens
+    - type: Fix
+      message: >-
+        fixed Fertilizer, Now part of a new chem that has the same 1u effect.
+        (25 fert + 5 dung makes it)
+  id: 6167
+  time: '2026-06-30T02:52:32.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/933
