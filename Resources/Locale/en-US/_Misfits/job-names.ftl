@@ -45,7 +45,13 @@ job-description-enclave-head-scientist = Direct the Enclave's research programs,
 job-name-enclave-scientist = Enclave Scientist
 job-description-enclave-scientist = Conduct field research, maintain advanced equipment, and support the cell's scientific mission.
 job-name-enclave-junior-scientist = Enclave Junior Scientist
-job-description-enclave-junior-scientist = Assist senior scientists, learn Enclave protocols, and contribute to ongoing research.# Synthetics job names and descriptions (Misfits-specific)
+job-description-enclave-junior-scientist = Assist senior scientists, learn Enclave protocols, and contribute to ongoing research.
+
+# #Misfits Add - EnclaveRecruit: hidden job for per-round recruitment tracking.
+job-name-enclave-recruit = Enclave Recruit
+job-description-enclave-recruit = Per-round Enclave recruit. Playtime here counts toward Enclave department timers.
+
+# Synthetics job names and descriptions (Misfits-specific)
 
 # Synthetics
 # #Misfits Add - Chief Ranger: admin-only Rangers leadership role.
